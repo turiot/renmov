@@ -1,0 +1,9 @@
+<html>
+	<body>
+		<p>Le but de cette petite application est de synchroniser deux répertoires initialement semblables, mais dont l'un a subi des renommages et déplacements pour appliquer les mêmes modifications au second.</p>
+		<p>Le cas d'usage typique est celui d'un backup sur 'dir1' de 'dir2'; après classement de fichiers dans dir2 (renommage et déplacements de fichiers dans des sous-répertoires), si l'on fait un nouveau backup, on se voit proposer des copies+suppressions sur dir1 ce qui est inefficace.</p>
+		<p>L'application détecte les actions effectuées sur dir2, s'appuyant la taille et la date de mise à jour (supposée inchangée par le classement), et propose d'effectuer les mêmes opérations de renommage/déplacement sur le répertoire cible dir1.</p>
+		<p>Mode opératoire : choisir les répertoires 1 (cible qui sera modifiée) et 2 (modèle), appuyer sur 'chercher'; sélectionner les items à mettre à jour puis appuuer sur 'exécuter'.</p>
+		<p>Un paramétrage permet de logger les actions dans un fichier, d'arrondir les temps à la seconde et de choisir la langue.</p>
+	</body>
+</html>
