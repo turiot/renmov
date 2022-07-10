@@ -29,12 +29,12 @@ public class Controller {
 		}
 		
 		var map = new ArrayListValuedHashMap<Criteria, Item>();
-		try (var walk = Files.walk(Path.of(new URI("file:///" + dir2)))) {
+		try (var walk = Files.walk(Path.of(dir2))) {
 			walk.filter(Files::isRegularFile).map(path -> {
 				var file = path.toFile();
 				Criteria key = null;
 				try {
-					var date = ((FileTime) Files.getAttribute(path, "creationTime")).toInstant();
+					var date = ((FileTime) Files.getAttribute(path, "lastModifiedTime")).toInstant();
 					key = new Criteria(date, file.length(), settings.roundToSecond);
 				}
 				catch (IOException ex) {
@@ -49,18 +49,18 @@ public class Controller {
 				map.put(item.criteria, item);
 			});
 		}
-		catch (URISyntaxException | IOException ex) {
+		catch (IOException ex) {
 			log.log(Level.SEVERE, null, ex);
 			res[0] = 2;
 		}
 		
-		try (var walk = Files.walk(Path.of(new URI("file:///" + dir1)))) {
+		try (var walk = Files.walk(Path.of(dir1))) {
 			walk.filter(Files::isRegularFile)
 				.<Item>mapMulti((path, consumer) -> {
 					var file1 = path.toFile();
 					Criteria key = null;
 					try {
-						var date = ((FileTime) Files.getAttribute(path, "creationTime")).toInstant();
+						var date = ((FileTime) Files.getAttribute(path, "lastModifiedTime")).toInstant();
 						key = new Criteria(date, file1.length(), settings.roundToSecond);
 					}
 					catch (IOException ex) {
@@ -99,7 +99,7 @@ public class Controller {
 					items.add(item);
 				});
 		}
-		catch (URISyntaxException | IOException ex) {
+		catch (IOException ex) {
 			log.log(Level.SEVERE, null, ex);
 			res[0] = 2;
 		}

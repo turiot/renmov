@@ -17,4 +17,13 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-jlink</actionName>
+            <displayName>jlink</displayName>
+            <recursive>false</recursive>
+            <goals>
+                <goal>jlink:jlink</goal>
+                <goal>-X</goal>
+            </goals>
+        </action>
     </actions>
